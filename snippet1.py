@@ -1,3 +1,11 @@
+import torch
+import airbench
+import scipy
+import matplotlib.pyplot as plt
+train_labels = airbench.CifarLoader('/tmp/cifar10', train=True).labels
+
+def load_mean(p):
+    return torch.load(p+'.pt')
 # out0 = load_mean('elastic_e10')
 # out0_lr4 = load_mean('lr/test_elastic_e10_lr4_n40000')
 # out0_lr6 = load_mean('lr/test_elastic_e10_lr6_n40000')
@@ -6,7 +14,7 @@
 # out0_lr15 = load_mean('lr/test_elastic_e10_lr15_many_n2400')
 # labels2 = labels
 
-out0_lr5 = load_mean('train_elastic_e10_n40000')
+out0_lr5 = load_mean('lr/train_elastic_e10_n40000')
 out0_lr4 = load_mean('lr/train_elastic_e10_lr4_n40000')
 out0_lr6 = load_mean('lr/train_elastic_e10_lr6_n40000')
 out0_lr7 = load_mean('lr/train_elastic_e10_lr7_many_n2400')
@@ -35,5 +43,6 @@ plt.plot([m1, m2], [m1, m2], color='gray', linestyle='--')
 plt.plot([m1, m2], [1.5*m1, 1.5*m2], color='gray', linestyle='--')
 plt.xlabel('$z_{0.5} - z_{0.4}$', fontsize=15)
 plt.ylabel('$z_{0.6} - z_{0.5}$', fontsize=15)
-plt.show()
+plt.savefig('test.png')
+#plt.show()
 
